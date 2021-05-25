@@ -1,0 +1,23 @@
+		// 저장된 쿠키값을 가져와 id 칸에 넣어준다 없다면 공백
+		$('#userId').val(Cookies.get('key'));
+			if ($('#userId').val() != '') { // 저장된 아이디가 체크된 상태라면
+				$('#idSaveCheck').attr('checked', true); // id 저장하기를 체크 상태로 두기
+			};
+	
+		// 체크박스에 변화가 있다면
+		$('#idSaveCheck').change(function() { 
+			if ($('#idSaveCheck').is(':checked')) { // id 저장하기 체크했을 때
+				Cookies.set('key', $('#userId').val(), {expires : 1});
+			} else { // id 저장하기 체크 해제했을 때
+				Cookies.remove('key');
+			}
+		});
+			
+		// id 저장하기를 체크한 상태에서 id 입력하는 경우에도 쿠키 저장
+		$('#userId').keyup(function() { 
+			if ($('#idSaveCheck').is(':checked')) { 
+				Cookies.set('key', $('#userId').val(), {expires : 1	});
+			};
+		});
+    
+ // 계속 같은 아이디가 저장됨
